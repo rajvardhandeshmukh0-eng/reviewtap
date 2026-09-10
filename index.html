@@ -2,368 +2,505 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ReviewTap</title>
+  <meta charset="UTF-8">
 
-    <style>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-        * {
-            box-sizing: border-box;
-        }
+  <title>ReviewTap</title>
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: #f5f7f6;
-            font-family: Arial, Helvetica, sans-serif;
-            color: #17201b;
-        }
+  <style>
 
-        .header {
-            background: white;
-            border-bottom: 1px solid #e5e7eb;
-            padding: 18px 20px;
-            text-align: center;
-        }
+    * {
+      box-sizing: border-box;
+    }
 
-        .logo {
-            font-size: 27px;
-            font-weight: 700;
-        }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7f6;
+      color: #1f2937;
+    }
 
-        .logo span {
-            color: #18a558;
-        }
+    .header {
+      background: #0b7a45;
+      color: white;
+      padding: 22px 20px;
+      text-align: center;
+    }
 
-        .main {
-            width: 100%;
-            max-width: 520px;
-            margin: auto;
-            padding: 30px 18px;
-        }
+    .logo {
+      font-size: 30px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+    }
 
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 28px 22px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-            border: 1px solid #e8ece9;
-        }
+    .tagline {
+      margin-top: 6px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
 
-        .business-icon {
-            width: 68px;
-            height: 68px;
-            margin: 0 auto 18px;
-            border-radius: 50%;
-            background: #eaf8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-        }
+    .container {
+      max-width: 620px;
+      margin: 25px auto;
+      padding: 0 16px 40px;
+    }
 
-        .business-name {
-            text-align: center;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+    }
 
-        .welcome {
-            text-align: center;
-            color: #6b7280;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 28px;
-        }
+    .business-name {
+      font-size: 25px;
+      font-weight: bold;
+      text-align: center;
+      color: #0b7a45;
+      margin-bottom: 8px;
+    }
 
-        .section-title {
-            font-size: 17px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
+    .subtitle {
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
 
-        /* Rating */
+    h2 {
+      font-size: 18px;
+      margin-top: 0;
+    }
 
-        .rating {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-bottom: 28px;
-        }
+    .stars {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 15px 0 25px;
+    }
 
-        .star {
-            font-size: 38px;
-            color: #d1d5db;
-            cursor: pointer;
-            transition: 0.15s;
-        }
+    .star {
+      font-size: 40px;
+      cursor: pointer;
+      color: #d1d5db;
+      transition: 0.2s;
+    }
 
-        .star.selected {
-            color: #f5b301;
-        }
+    .star.active {
+      color: #f5b301;
+    }
 
-        .rating-text {
-            text-align: center;
-            color: #6b7280;
-            font-size: 13px;
-            margin-top: -20px;
-            margin-bottom: 25px;
-        }
+    .rating-text {
+      text-align: center;
+      font-size: 14px;
+      color: #6b7280;
+      margin-top: -15px;
+      margin-bottom: 20px;
+    }
 
-        /* Options */
+    .options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
 
-        .options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 9px;
-            margin-bottom: 24px;
-        }
+    .option {
+      border: 1px solid #d1d5db;
+      background: white;
+      padding: 10px 14px;
+      border-radius: 22px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: 0.2s;
+    }
 
-        .option {
-            border: 1px solid #d1d5db;
-            background: white;
-            border-radius: 20px;
-            padding: 10px 14px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+    .option.selected {
+      background: #0b7a45;
+      color: white;
+      border-color: #0b7a45;
+    }
 
-        .option.selected {
-            background: #eaf8f0;
-            border-color: #18a558;
-            color: #137a43;
-            font-weight: 600;
-        }
+    textarea {
+      width: 100%;
+      min-height: 110px;
+      margin-top: 10px;
+      padding: 13px;
+      border: 1px solid #d1d5db;
+      border-radius: 12px;
+      resize: vertical;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
 
-        .option:hover {
-            border-color: #18a558;
-        }
+    textarea:focus {
+      border-color: #0b7a45;
+    }
 
-        /* Text */
+    .main-button {
+      width: 100%;
+      border: none;
+      background: #0b7a45;
+      color: white;
+      padding: 15px;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
 
-        textarea {
-            width: 100%;
-            min-height: 100px;
-            resize: vertical;
-            border: 1px solid #d1d5db;
-            border-radius: 11px;
-            padding: 13px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 14px;
-            outline: none;
-            margin-bottom: 20px;
-        }
+    .main-button:hover {
+      background: #086238;
+    }
 
-        textarea:focus {
-            border-color: #18a558;
-            box-shadow: 0 0 0 3px rgba(24,165,88,0.10);
-        }
+    .main-button:disabled {
+      background: #9ca3af;
+      cursor: not-allowed;
+    }
 
-        /* Button */
+    .review-card {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 17px;
+      margin-top: 15px;
+      background: #fafafa;
+    }
 
-        .generate-btn {
-            width: 100%;
-            padding: 16px;
-            border: none;
-            border-radius: 11px;
-            background: #18a558;
-            color: white;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-        }
+    .review-text {
+      line-height: 1.6;
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
 
-        .generate-btn:hover {
-            background: #138a49;
-        }
+    .copy-button {
+      width: 100%;
+      border: 1px solid #0b7a45;
+      color: #0b7a45;
+      background: white;
+      padding: 11px;
+      border-radius: 9px;
+      font-weight: bold;
+      cursor: pointer;
+    }
 
-        /* Suggestions */
+    .copy-button:hover {
+      background: #eef8f2;
+    }
 
-        #suggestions {
-            margin-top: 25px;
-        }
+    .google-button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      background: #0b7a45;
+      color: white;
+      padding: 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
 
-        .suggestion-card {
-            border: 1px solid #e5e7eb;
-            background: #f9fafb;
-            border-radius: 13px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #6b7280;
+    }
 
-        .suggestion-title {
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
+    .spinner {
+      width: 35px;
+      height: 35px;
+      border: 4px solid #e5e7eb;
+      border-top: 4px solid #0b7a45;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 12px;
+    }
 
-        .suggestion-text {
-            color: #374151;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 13px;
-        }
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
-        .copy-btn {
-            border: none;
-            border-radius: 8px;
-            padding: 9px 14px;
-            background: #17201b;
-            color: white;
-            font-size: 12px;
-            font-weight: 600;
-            cursor: pointer;
-        }
+    .error {
+      background: #fff1f2;
+      color: #be123c;
+      border: 1px solid #fecdd3;
+      padding: 14px;
+      border-radius: 10px;
+      margin-top: 15px;
+      font-size: 14px;
+    }
 
-        .google-btn {
-            width: 100%;
-            padding: 15px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 10px;
-            background: #18a558;
-            color: white;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-        }
+    .hidden {
+      display: none;
+    }
 
-        .google-btn:hover {
-            background: #138a49;
-        }
+    .footer {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 12px;
+      margin-top: 25px;
+    }
 
-        .loading {
-            text-align: center;
-            padding: 40px 10px;
-            color: #6b7280;
-        }
+    @media (max-width: 500px) {
 
-        .spinner {
-            width: 38px;
-            height: 38px;
-            border: 4px solid #e5e7eb;
-            border-top: 4px solid #18a558;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 18px;
-        }
+      .card {
+        padding: 19px;
+      }
 
-        @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+      .business-name {
+        font-size: 22px;
+      }
 
-        .error {
-            text-align: center;
-            padding: 35px 10px;
-        }
+      .star {
+        font-size: 35px;
+      }
 
-        .error-icon {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
+    }
 
-        .error-title {
-            font-size: 21px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .error-text {
-            color: #6b7280;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .footer {
-            text-align: center;
-            color: #9ca3af;
-            font-size: 12px;
-            padding: 20px;
-        }
-
-        @media (max-width: 600px) {
-
-            .main {
-                padding: 22px 14px;
-            }
-
-            .card {
-                padding: 24px 18px;
-            }
-
-            .business-name {
-                font-size: 22px;
-            }
-
-            .star {
-                font-size: 34px;
-            }
-        }
-
-    </style>
+  </style>
 
 </head>
 
 
 <body>
 
-<div class="header">
+
+  <div class="header">
 
     <div class="logo">
-        Review<span>Tap</span>
+      ReviewTap
     </div>
 
-</div>
+    <div class="tagline">
+      Share your experience in seconds
+    </div>
+
+  </div>
 
 
-<div class="main">
 
-    <div class="card" id="content">
+  <div class="container">
 
-        <div class="loading">
 
-            <div class="spinner"></div>
+    <!-- BUSINESS -->
 
-            Loading...
+    <div class="card">
 
+      <div id="businessName"
+           class="business-name">
+        Loading...
+      </div>
+
+      <div class="subtitle">
+        We'd love to hear about your experience
+      </div>
+
+    </div>
+
+
+
+    <!-- REVIEW INPUT -->
+
+    <div id="reviewForm"
+         class="card hidden">
+
+
+      <h2>
+        How was your experience?
+      </h2>
+
+
+      <!-- STAR RATING -->
+
+      <div class="stars">
+
+        <span class="star"
+              onclick="selectRating(1)">★</span>
+
+        <span class="star"
+              onclick="selectRating(2)">★</span>
+
+        <span class="star"
+              onclick="selectRating(3)">★</span>
+
+        <span class="star"
+              onclick="selectRating(4)">★</span>
+
+        <span class="star"
+              onclick="selectRating(5)">★</span>
+
+      </div>
+
+
+      <div id="ratingText"
+           class="rating-text">
+        Select your rating
+      </div>
+
+
+
+      <!-- EXPERIENCE -->
+
+      <h2>
+        What did you like?
+      </h2>
+
+
+      <div class="options">
+
+        <button class="option"
+                onclick="toggleOption(this,'Product / Service')">
+          Product / Service
+        </button>
+
+        <button class="option"
+                onclick="toggleOption(this,'Friendly Staff')">
+          Friendly Staff
+        </button>
+
+        <button class="option"
+                onclick="toggleOption(this,'Good Quality')">
+          Good Quality
+        </button>
+
+        <button class="option"
+                onclick="toggleOption(this,'Fast Service')">
+          Fast Service
+        </button>
+
+        <button class="option"
+                onclick="toggleOption(this,'Cleanliness')">
+          Cleanliness
+        </button>
+
+        <button class="option"
+                onclick="toggleOption(this,'Value for Money')">
+          Value for Money
+        </button>
+
+      </div>
+
+
+
+      <!-- EXTRA COMMENT -->
+
+      <h2 style="margin-top:25px;">
+        Anything else?
+      </h2>
+
+      <textarea id="extraText"
+                placeholder="Tell us anything else about your experience..."></textarea>
+
+
+
+      <!-- GENERATE -->
+
+      <button id="generateButton"
+              class="main-button"
+              onclick="generateSuggestions()">
+
+        ✨ Generate AI Review Suggestions
+
+      </button>
+
+
+      <div id="errorBox"
+           class="error hidden"></div>
+
+    </div>
+
+
+
+    <!-- LOADING -->
+
+    <div id="loadingBox"
+         class="card hidden">
+
+      <div class="loading">
+
+        <div class="spinner"></div>
+
+        <strong>
+          Creating your review...
+        </strong>
+
+        <div style="margin-top:6px;">
+          ReviewTap AI is preparing suggestions
         </div>
 
+      </div>
+
     </div>
 
-</div>
 
 
-<div class="footer">
-    Powered by ReviewTap
-</div>
+    <!-- AI REVIEWS -->
+
+    <div id="suggestionsCard"
+         class="card hidden">
+
+      <h2>
+        ✨ Your Review Suggestions
+      </h2>
+
+      <p style="color:#6b7280;font-size:14px;">
+        Choose the review you like, copy it, and post it on Google.
+      </p>
+
+      <div id="suggestions"></div>
+
+      <a id="googleButton"
+         class="google-button"
+         href="#"
+         target="_blank">
+
+        ⭐ Write a Google Review
+
+      </a>
+
+    </div>
+
+
+
+    <div class="footer">
+      Powered by ReviewTap
+    </div>
+
+
+  </div>
+
 
 
 <script>
 
 
-// ==========================================
-// GOOGLE APPS SCRIPT API
-// ==========================================
+// ======================================================
+// CONFIGURATION
+// ======================================================
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycby_ltvYghy_0L4BX-ZJVzwq8f0D0anl5YABLxU2j_cKsOe28YNQhTp0bQnvUw8Ix1_v/exec";
+  "https://script.google.com/macros/s/AKfycby_ltvYghy_0L4BX-ZJVzwq8f0D0anl5YABLxU2j_cKsOe28YNQhTp0bQnvUw8Ix1_v/exec";
 
 
-// ==========================================
-// GET VENDOR ID
-// ==========================================
+// ======================================================
+// VARIABLES
+// ======================================================
 
 const urlParams =
-    new URLSearchParams(window.location.search);
+  new URLSearchParams(window.location.search);
 
 const vendorId =
-    urlParams.get("vendor");
+  urlParams.get("vendor");
+
+
+let vendorName = "";
 
 let googleReviewLink = "";
 
@@ -372,517 +509,522 @@ let selectedRating = 0;
 let selectedOptions = [];
 
 
-// ==========================================
+// ======================================================
 // LOAD VENDOR
-// ==========================================
+// ======================================================
 
-async function loadVendor() {
+function loadVendor() {
 
-    const content =
-        document.getElementById("content");
+  if (!vendorId) {
 
-    if (!vendorId) {
+    showError(
+      "Vendor information is missing."
+    );
+
+    return;
+
+  }
+
+
+  fetch(
+    API_URL +
+    "?vendorId=" +
+    encodeURIComponent(vendorId)
+  )
+
+    .then(response => response.json())
+
+    .then(data => {
+
+      if (!data.success) {
 
         showError(
-            "Invalid QR Code",
-            "This ReviewTap QR code does not contain a valid vendor ID."
+          "Vendor not found."
         );
 
         return;
-    }
 
-    try {
+      }
 
-        const response =
-            await fetch(
-                API_URL +
-                "?vendorId=" +
-                encodeURIComponent(vendorId)
-            );
 
-        const data =
-            await response.json();
-
-        if (!data.success) {
-
-            showError(
-                "Vendor Not Found",
-                "We could not find this business."
-            );
-
-            return;
-        }
-
-        if (
-            data.status &&
-            data.status.toString().toLowerCase() !== "active"
-        ) {
-
-            showError(
-                "QR Code Inactive",
-                "This ReviewTap QR code is currently inactive."
-            );
-
-            return;
-        }
-
-        googleReviewLink =
-            data.googleReviewLink;
-
-        showReviewPage(data);
-
-    }
-
-    catch (error) {
-
-        console.error(error);
+      if (
+        data.status &&
+        data.status.toLowerCase() !== "active"
+      ) {
 
         showError(
-            "Something went wrong",
-            "Unable to load this ReviewTap page. Please try again."
+          "This ReviewTap link is currently inactive."
         );
-    }
+
+        return;
+
+      }
+
+
+      vendorName =
+        data.vendorName;
+
+      googleReviewLink =
+        data.googleReviewLink;
+
+
+      document.getElementById(
+        "businessName"
+      ).textContent = vendorName;
+
+
+      document.getElementById(
+        "reviewForm"
+      ).classList.remove("hidden");
+
+    })
+
+
+    .catch(error => {
+
+      console.error(error);
+
+      showError(
+        "Unable to load vendor information."
+      );
+
+    });
+
 }
 
 
-// ==========================================
-// SHOW REVIEW PAGE
-// ==========================================
-
-function showReviewPage(data) {
-
-    const content =
-        document.getElementById("content");
-
-    content.innerHTML = `
-
-        <div class="business-icon">
-            ⭐
-        </div>
-
-        <div class="business-name">
-            ${escapeHTML(data.vendorName)}
-        </div>
-
-        <div class="welcome">
-
-            Thank you for visiting us!<br>
-            Tell us about your experience and we'll help you write a review.
-
-        </div>
-
-
-        <div class="section-title">
-            How was your experience?
-        </div>
-
-
-        <div class="rating">
-
-            <span class="star" onclick="selectRating(1)">★</span>
-            <span class="star" onclick="selectRating(2)">★</span>
-            <span class="star" onclick="selectRating(3)">★</span>
-            <span class="star" onclick="selectRating(4)">★</span>
-            <span class="star" onclick="selectRating(5)">★</span>
-
-        </div>
-
-
-        <div class="rating-text" id="ratingText">
-            Select your rating
-        </div>
-
-
-        <div class="section-title">
-            What did you like?
-        </div>
-
-
-        <div class="options">
-
-            <button class="option"
-                onclick="toggleOption(this, 'Product / Service')">
-                Product / Service
-            </button>
-
-            <button class="option"
-                onclick="toggleOption(this, 'Staff')">
-                Friendly Staff
-            </button>
-
-            <button class="option"
-                onclick="toggleOption(this, 'Quality')">
-                Good Quality
-            </button>
-
-            <button class="option"
-                onclick="toggleOption(this, 'Fast Service')">
-                Fast Service
-            </button>
-
-            <button class="option"
-                onclick="toggleOption(this, 'Cleanliness')">
-                Cleanliness
-            </button>
-
-            <button class="option"
-                onclick="toggleOption(this, 'Value for Money')">
-                Value for Money
-            </button>
-
-        </div>
-
-
-        <div class="section-title">
-            Anything else you'd like to mention?
-        </div>
-
-
-        <textarea
-            id="customerComment"
-            placeholder="Example: The staff was very helpful and the service was quick..."
-        ></textarea>
-
-
-        <button
-            class="generate-btn"
-            onclick="generateSuggestions()"
-        >
-            Generate Review Suggestions
-        </button>
-
-
-        <div id="suggestions"></div>
-
-    `;
-}
-
-
-// ==========================================
-// SELECT RATING
-// ==========================================
+// ======================================================
+// RATING
+// ======================================================
 
 function selectRating(rating) {
 
-    selectedRating = rating;
-
-    const stars =
-        document.querySelectorAll(".star");
-
-    stars.forEach(function(star, index) {
-
-        if (index < rating) {
-
-            star.classList.add("selected");
-
-        } else {
-
-            star.classList.remove("selected");
-
-        }
-
-    });
+  selectedRating = rating;
 
 
-    const ratingText =
-        document.getElementById("ratingText");
-
-    const messages = {
-        1: "We're sorry your experience wasn't better.",
-        2: "Thank you for your feedback.",
-        3: "Thank you! We're glad you visited us.",
-        4: "Great! We're happy you enjoyed your experience.",
-        5: "Excellent! We're glad you loved your experience!"
-    };
-
-    ratingText.textContent =
-        messages[rating];
-
-}
+  const stars =
+    document.querySelectorAll(".star");
 
 
-// ==========================================
-// SELECT OPTIONS
-// ==========================================
+  stars.forEach(
+    (star, index) => {
 
-function toggleOption(button, value) {
-
-    button.classList.toggle("selected");
-
-    if (selectedOptions.includes(value)) {
-
-        selectedOptions =
-            selectedOptions.filter(
-                item => item !== value
-            );
-
-    } else {
-
-        selectedOptions.push(value);
+      star.classList.toggle(
+        "active",
+        index < rating
+      );
 
     }
+  );
+
+
+  const texts = {
+
+    1: "Very poor",
+
+    2: "Poor",
+
+    3: "Average",
+
+    4: "Good",
+
+    5: "Excellent"
+
+  };
+
+
+  document.getElementById(
+    "ratingText"
+  ).textContent = texts[rating];
 
 }
 
 
-// ==========================================
-// GENERATE REVIEW SUGGESTIONS
-// ==========================================
+// ======================================================
+// EXPERIENCE OPTIONS
+// ======================================================
+
+function toggleOption(
+  button,
+  value
+) {
+
+  button.classList.toggle(
+    "selected"
+  );
+
+
+  if (
+    selectedOptions.includes(value)
+  ) {
+
+    selectedOptions =
+      selectedOptions.filter(
+        item => item !== value
+      );
+
+  } else {
+
+    selectedOptions.push(value);
+
+  }
+
+}
+
+
+// ======================================================
+// GENERATE AI REVIEWS
+// ======================================================
 
 function generateSuggestions() {
 
-    if (selectedRating === 0) {
+  hideError();
 
-        alert("Please select your rating first.");
 
-        return;
+  if (selectedRating === 0) {
+
+    showError(
+      "Please select a star rating first."
+    );
+
+    return;
+
+  }
+
+
+  if (selectedOptions.length === 0) {
+
+    showError(
+      "Please select at least one thing you liked."
+    );
+
+    return;
+
+  }
+
+
+  const extraText =
+    document.getElementById(
+      "extraText"
+    ).value.trim();
+
+
+  const generateButton =
+    document.getElementById(
+      "generateButton"
+    );
+
+
+  generateButton.disabled = true;
+
+  generateButton.textContent =
+    "Creating reviews...";
+
+
+  document.getElementById(
+    "reviewForm"
+  ).classList.add("hidden");
+
+
+  document.getElementById(
+    "suggestionsCard"
+  ).classList.add("hidden");
+
+
+  document.getElementById(
+    "loadingBox"
+  ).classList.remove("hidden");
+
+
+  const requestData = {
+
+    action: "generateReview",
+
+    vendorName: vendorName,
+
+    rating: selectedRating,
+
+    experience: selectedOptions,
+
+    extraText: extraText
+
+  };
+
+
+  fetch(
+
+    API_URL,
+
+    {
+
+      method: "POST",
+
+      headers: {
+
+        "Content-Type":
+          "text/plain;charset=utf-8"
+
+      },
+
+      body:
+        JSON.stringify(requestData)
+
     }
 
+  )
 
-    const comment =
-        document
-            .getElementById("customerComment")
-            .value
-            .trim();
+  .then(
+    response => response.json()
+  )
 
+  .then(
+    data => {
 
-    const vendorName =
-        document
-            .querySelector(".business-name")
-            .textContent;
+      document.getElementById(
+        "loadingBox"
+      ).classList.add("hidden");
 
 
-    const ratingText =
-        "⭐".repeat(selectedRating);
+      generateButton.disabled = false;
 
+      generateButton.textContent =
+        "✨ Generate AI Review Suggestions";
 
-    let experience = "";
 
-    if (selectedOptions.length > 0) {
+      if (!data.success) {
 
-        experience =
-            selectedOptions.join(", ");
+        document.getElementById(
+          "reviewForm"
+        ).classList.remove("hidden");
 
-    } else {
 
-        experience =
-            "overall experience";
-
-    }
-
-
-    let extraText = "";
-
-    if (comment) {
-
-        extraText =
-            " " + comment;
-
-    }
-
-
-    // ======================================
-    // CREATE 3 LOCAL SUGGESTIONS
-    // ======================================
-
-    const suggestion1 =
-        `I had a ${selectedRating >= 4 ? "great" : "good"} experience at ${vendorName}. I really appreciated the ${experience}.${extraText}`;
-
-
-    const suggestion2 =
-        `Really happy with my experience at ${vendorName}. The ${experience} made my visit enjoyable.${extraText} I would definitely recommend them.`;
-
-
-    const suggestion3 =
-        `Had a pleasant experience at ${vendorName}. Everything was good, especially the ${experience}.${extraText} Overall, a very positive experience.`;
-
-
-    showSuggestions([
-        suggestion1,
-        suggestion2,
-        suggestion3
-    ]);
-
-}
-
-
-// ==========================================
-// SHOW SUGGESTIONS
-// ==========================================
-
-function showSuggestions(suggestions) {
-
-    const container =
-        document.getElementById("suggestions");
-
-
-    let html = `
-
-        <div class="section-title">
-            Choose a review you like
-        </div>
-
-    `;
-
-
-    suggestions.forEach(function(review, index) {
-
-        html += `
-
-            <div class="suggestion-card">
-
-                <div class="suggestion-title">
-                    Review Option ${index + 1}
-                </div>
-
-                <div class="suggestion-text">
-                    ${escapeHTML(review)}
-                </div>
-
-                <button
-                    class="copy-btn"
-                    onclick="copyReview(${index})"
-                >
-                    Copy Review
-                </button>
-
-            </div>
-
-        `;
-
-    });
-
-
-    html += `
-
-        <button
-            class="google-btn"
-            onclick="openGoogleReview()"
-        >
-            ⭐ Write a Google Review
-        </button>
-
-    `;
-
-
-    container.innerHTML = html;
-
-
-    window.generatedReviews =
-        suggestions;
-
-
-    container.scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
-}
-
-
-// ==========================================
-// COPY REVIEW
-// ==========================================
-
-function copyReview(index) {
-
-    const review =
-        window.generatedReviews[index];
-
-
-    navigator.clipboard
-        .writeText(review)
-        .then(function() {
-
-            alert(
-                "Review copied! Now open Google Reviews and paste it."
-            );
-
-        })
-        .catch(function() {
-
-            alert(
-                "Unable to copy automatically. Please select the review manually."
-            );
-
-        });
-
-}
-
-
-// ==========================================
-// OPEN GOOGLE REVIEW
-// ==========================================
-
-function openGoogleReview() {
-
-    if (!googleReviewLink) {
-
-        alert(
-            "Google Review link is not available."
+        showError(
+          data.error ||
+          "Unable to generate reviews."
         );
 
         return;
+
+      }
+
+
+      showSuggestions(
+        data.reviews
+      );
+
     }
 
+  )
 
-    window.open(
-        googleReviewLink,
-        "_blank"
+  .catch(
+    error => {
+
+      console.error(error);
+
+
+      document.getElementById(
+        "loadingBox"
+      ).classList.add("hidden");
+
+
+      document.getElementById(
+        "reviewForm"
+      ).classList.remove("hidden");
+
+
+      generateButton.disabled = false;
+
+      generateButton.textContent =
+        "✨ Generate AI Review Suggestions";
+
+
+      showError(
+        "Unable to connect to ReviewTap AI. Please try again."
+      );
+
+    }
+
+  );
+
+}
+
+
+// ======================================================
+// SHOW SUGGESTIONS
+// ======================================================
+
+function showSuggestions(
+  reviews
+) {
+
+  const container =
+    document.getElementById(
+      "suggestions"
     );
 
-}
+
+  container.innerHTML = "";
 
 
-// ==========================================
-// ERROR
-// ==========================================
+  reviews.forEach(
+    (review, index) => {
 
-function showError(title, message) {
+      const card =
+        document.createElement("div");
 
-    document.getElementById("content").innerHTML = `
 
-        <div class="error">
+      card.className =
+        "review-card";
 
-            <div class="error-icon">
-                ⚠️
-            </div>
 
-            <div class="error-title">
-                ${title}
-            </div>
+      card.innerHTML = `
 
-            <div class="error-text">
-                ${message}
-            </div>
-
+        <div class="review-text">
+          ${escapeHTML(review)}
         </div>
 
-    `;
+        <button
+          class="copy-button"
+          onclick="copyReview(this, ${index})">
+
+          📋 Copy Review
+
+        </button>
+
+      `;
+
+
+      container.appendChild(card);
+
+    }
+  );
+
+
+  document.getElementById(
+    "googleButton"
+  ).href =
+    googleReviewLink;
+
+
+  document.getElementById(
+    "suggestionsCard"
+  ).classList.remove("hidden");
+
 }
 
 
-// ==========================================
-// HTML ESCAPE
-// ==========================================
+// ======================================================
+// COPY REVIEW
+// ======================================================
 
-function escapeHTML(value) {
+function copyReview(
+  button,
+  index
+) {
 
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+  const cards =
+    document.querySelectorAll(
+      ".review-card"
+    );
+
+
+  const text =
+    cards[index]
+      .querySelector(".review-text")
+      .textContent
+      .trim();
+
+
+  navigator.clipboard
+    .writeText(text)
+
+    .then(() => {
+
+      button.textContent =
+        "✓ Copied!";
+
+      setTimeout(
+        () => {
+
+          button.textContent =
+            "📋 Copy Review";
+
+        },
+        2000
+      );
+
+    })
+
+    .catch(() => {
+
+      alert(
+        "Please select and copy the review manually."
+      );
+
+    });
 
 }
 
 
-// ==========================================
+// ======================================================
+// ERROR
+// ======================================================
+
+function showError(
+  message
+) {
+
+  const box =
+    document.getElementById(
+      "errorBox"
+    );
+
+  box.textContent =
+    message;
+
+  box.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+function hideError() {
+
+  document.getElementById(
+    "errorBox"
+  ).classList.add(
+    "hidden"
+  );
+
+}
+
+
+// ======================================================
+// HTML SECURITY
+// ======================================================
+
+function escapeHTML(
+  text
+) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    text;
+
+  return div.innerHTML;
+
+}
+
+
+// ======================================================
 // START
-// ==========================================
+// ======================================================
 
 loadVendor();
+
 
 </script>
 
