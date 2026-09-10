@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ReviewTap</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        Review<span>Tap</span>
+    </div>
+
+    <div class="card">
+
+        <h1>How was your experience?</h1>
+
+        <p class="subtitle">
+            Your feedback helps this business grow.
+        </p>
+
+        <h3>Choose a review suggestion</h3>
+
+        <div id="suggestions"></div>
+
+        <label>Your review</label>
+
+        <textarea
+            id="review"
+            placeholder="Write or edit your review here..."
+        ></textarea>
+
+        <button id="copyBtn">
+            Copy Review
+        </button>
+
+        <button id="googleBtn" class="google">
+            Post on Google
+        </button>
+
+        <p id="message"></p>
+
+    </div>
+
+    <p class="footer">
+        Powered by ReviewTap
+    </p>
+
+</div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
