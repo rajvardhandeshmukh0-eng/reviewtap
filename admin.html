@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>ReviewTap Admin</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        Review<span>Tap</span>
+    </div>
+
+    <div class="card">
+
+        <h1>Add Vendor</h1>
+
+        <p class="subtitle">
+            Create a ReviewTap QR for your vendor.
+        </p>
+
+        <label>Vendor Name</label>
+
+        <input
+            type="text"
+            id="vendorName"
+            placeholder="Example: ABC Restaurant"
+        >
+
+        <label>Google Review Page Link</label>
+
+        <input
+            type="url"
+            id="googleLink"
+            placeholder="Paste Google review link"
+        >
+
+        <button onclick="generateQR()">
+            Generate QR Code
+        </button>
+
+        <div id="result"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+function generateQR() {
+
+    const vendorName =
+        document.getElementById("vendorName").value.trim();
+
+    const googleLink =
+        document.getElementById("googleLink").value.trim();
+
+    if (!vendorName || !googleLink) {
+
+        alert("Please enter vendor name and Google Review link.");
+
+        return;
+    }
+
+    const vendorId =
+        "V" + Date.now();
+
+    const reviewtapURL =
+        window.location.origin +
+        window.location.pathname.replace(
+            "admin.html",
+            "index.html"
+        ) +
+        "?vendor=" +
+        vendorId;
+
+    document.getElementById("result").innerHTML = `
+
+        <h3>Vendor Created</h3>
+
+        <p><strong>${vendorName}</strong></p>
+
+        <p>Vendor ID:</p>
+
+        <input
+            value="${vendorId}"
+            readonly
+        >
+
+        <p>ReviewTap URL:</p>
+
+        <input
+            value="${reviewtapURL}"
+            readonly
+        >
+
+        <br><br>
+
+        <img
+            src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(reviewtapURL)}"
+            width="250"
+            height="250"
+            alt="ReviewTap QR Code"
+        >
+
+        <br><br>
+
+        <button onclick="window.print()">
+            Print QR
+        </button>
+
+    `;
+}
+
+</script>
+
+</body>
+
+</html>
