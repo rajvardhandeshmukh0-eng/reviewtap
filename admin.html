@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,79 +8,466 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>ReviewTap Admin</title>
+    <title>ReviewTap - Admin</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f5f7f6;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #17201b;
+        }
+
+        /* Header */
+
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 25px;
+        }
+
+        .logo {
+            max-width: 1000px;
+            margin: auto;
+            font-size: 28px;
+            font-weight: 700;
+            color: #17201b;
+        }
+
+        .logo span {
+            color: #18a558;
+        }
+
+        /* Main */
+
+        .main {
+            max-width: 1000px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h1 {
+            margin: 0 0 8px;
+            font-size: 30px;
+        }
+
+        .page-title p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* Card */
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 1px solid #e8ece9;
+        }
+
+        /* Form */
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #18a558;
+            box-shadow: 0 0 0 3px rgba(24,165,88,0.12);
+        }
+
+        .help-text {
+            margin-top: 7px;
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        /* Generate Button */
+
+        .generate-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #18a558;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .generate-btn:hover {
+            background: #138a49;
+        }
+
+        .generate-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        /* Loading */
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        /* Result */
+
+        #result {
+            margin-top: 30px;
+        }
+
+        .success-box {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .success-title {
+            color: #15803d;
+            font-weight: 700;
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+
+        .success-text {
+            color: #166534;
+            font-size: 13px;
+        }
+
+        /* Result fields */
+
+        .result-group {
+            margin-bottom: 18px;
+        }
+
+        .result-label {
+            display: block;
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .copy-row {
+            display: flex;
+            gap: 8px;
+        }
+
+        .copy-row input {
+            flex: 1;
+            background: #f9fafb;
+        }
+
+        .copy-btn {
+            width: 90px;
+            border: none;
+            border-radius: 10px;
+            background: #17201b;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background: #000000;
+        }
+
+        /* QR */
+
+        .qr-section {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .qr-section h3 {
+            margin: 0 0 5px;
+        }
+
+        .qr-section p {
+            margin: 0 0 20px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .qr-container {
+            display: inline-flex;
+            padding: 15px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+        }
+
+        .qr-container img {
+            width: 250px;
+            height: 250px;
+        }
+
+        /* Print */
+
+        .print-btn {
+            display: block;
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #17201b;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .print-btn:hover {
+            background: #000000;
+        }
+
+        /* Footer */
+
+        .footer {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 12px;
+            margin-top: 30px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 16px 18px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .main {
+                margin: 25px auto;
+                padding: 0 15px;
+            }
+
+            .page-title h1 {
+                font-size: 25px;
+            }
+
+            .card {
+                padding: 20px;
+                border-radius: 15px;
+            }
+
+            .copy-row {
+                flex-direction: column;
+            }
+
+            .copy-btn {
+                width: 100%;
+                padding: 12px;
+            }
+
+            .qr-container img {
+                width: 220px;
+                height: 220px;
+            }
+
+        }
+
+        /* Print */
+
+        @media print {
+
+            body {
+                background: white;
+            }
+
+            .header,
+            .page-title,
+            .form-section,
+            .footer,
+            .copy-btn,
+            .print-btn {
+                display: none !important;
+            }
+
+            .main {
+                margin: 0;
+                padding: 0;
+            }
+
+            .card {
+                box-shadow: none;
+                border: none;
+            }
+
+            .qr-section {
+                border: none;
+            }
+
+        }
+
+    </style>
 
 </head>
 
 
 <body>
 
-<div class="container">
+
+<!-- HEADER -->
+
+<div class="header">
 
     <div class="logo">
         Review<span>Tap</span>
     </div>
 
+</div>
 
-    <div class="card">
 
-        <h1>Add Vendor</h1>
 
-        <p class="subtitle">
-            Create a ReviewTap QR for your vendor.
+<!-- MAIN -->
+
+<div class="main">
+
+
+    <div class="page-title">
+
+        <h1>Create Vendor QR</h1>
+
+        <p>
+            Create a unique ReviewTap QR code for your business.
         </p>
-
-
-        <!-- Vendor Name -->
-
-        <label>Vendor Name</label>
-
-        <input
-            type="text"
-            id="vendorName"
-            placeholder="Example: ABC Restaurant"
-        >
-
-
-        <!-- Google Review Link -->
-
-        <label>Google Review Page Link</label>
-
-        <input
-            type="url"
-            id="googleLink"
-            placeholder="Paste Google review link"
-        >
-
-
-        <!-- Generate Button -->
-
-        <button onclick="generateQR()">
-            Generate QR Code
-        </button>
-
-
-        <!-- Result -->
-
-        <div id="result"></div>
 
     </div>
 
 
-    <p class="footer">
+
+    <div class="card">
+
+
+        <!-- FORM -->
+
+        <div class="form-section">
+
+
+            <div class="form-group">
+
+                <label for="vendorName">
+                    Vendor / Business Name
+                </label>
+
+                <input
+                    type="text"
+                    id="vendorName"
+                    placeholder="Example: ABC Restaurant"
+                >
+
+            </div>
+
+
+
+            <div class="form-group">
+
+                <label for="googleLink">
+                    Google Review Page Link
+                </label>
+
+                <input
+                    type="url"
+                    id="googleLink"
+                    placeholder="Paste Google review link here"
+                >
+
+                <div class="help-text">
+                    This is the Google page where customers will post their review.
+                </div>
+
+            </div>
+
+
+
+            <button
+                class="generate-btn"
+                id="generateBtn"
+                onclick="generateQR()"
+            >
+                Generate ReviewTap QR
+            </button>
+
+
+            <div
+                class="loading"
+                id="loading"
+            >
+                Creating vendor and generating QR...
+            </div>
+
+
+        </div>
+
+
+
+        <!-- RESULT -->
+
+        <div id="result"></div>
+
+
+    </div>
+
+
+    <div class="footer">
         Powered by ReviewTap
-    </p>
+    </div>
+
 
 </div>
+
 
 
 <script>
 
 
 // ==========================================
-// GOOGLE APPS SCRIPT API URL
+// GOOGLE APPS SCRIPT API
 // ==========================================
 
 const API_URL =
@@ -96,15 +482,11 @@ const API_URL =
 async function generateQR() {
 
 
-    // Get vendor name
-
     const vendorName =
         document.getElementById("vendorName")
         .value
         .trim();
 
-
-    // Get Google review link
 
     const googleLink =
         document.getElementById("googleLink")
@@ -112,22 +494,36 @@ async function generateQR() {
         .trim();
 
 
-
-    // Validate input
+    // Validate
 
     if (!vendorName || !googleLink) {
 
         alert(
-            "Please enter vendor name and Google Review link."
+            "Please enter Vendor Name and Google Review Link."
         );
 
         return;
+
     }
+
+
+    // Disable button
+
+    const generateBtn =
+        document.getElementById("generateBtn");
+
+    const loading =
+        document.getElementById("loading");
+
+
+    generateBtn.disabled = true;
+
+    loading.style.display = "block";
 
 
 
     // ==========================================
-    // GENERATE UNIQUE VENDOR ID
+    // UNIQUE VENDOR ID
     // ==========================================
 
     const vendorId =
@@ -136,68 +532,60 @@ async function generateQR() {
 
 
     // ==========================================
-    // SAVE VENDOR TO GOOGLE SHEET
+    // SAVE TO GOOGLE SHEET
     // ==========================================
 
     try {
 
 
-        const response = await fetch(
-            API_URL,
-            {
+        const response =
+            await fetch(
+                API_URL,
+                {
 
-                method: "POST",
+                    method: "POST",
 
-                headers: {
-                    "Content-Type":
-                    "text/plain;charset=utf-8"
-                },
+                    headers: {
+                        "Content-Type":
+                        "text/plain;charset=utf-8"
+                    },
 
-                body: JSON.stringify({
+                    body: JSON.stringify({
 
-                    vendorId:
-                        vendorId,
+                        vendorId:
+                            vendorId,
 
-                    vendorName:
-                        vendorName,
+                        vendorName:
+                            vendorName,
 
-                    googleReviewLink:
-                        googleLink,
+                        googleReviewLink:
+                            googleLink,
 
-                    status:
-                        "Active"
+                        status:
+                            "Active"
 
-                })
+                    })
 
-            }
-        );
+                }
+            );
 
-
-
-        // Convert response to JSON
 
         const result =
             await response.json();
 
 
-
-        // ==========================================
-        // CHECK DATABASE RESPONSE
-        // ==========================================
-
         if (!result.success) {
 
-            alert(
+            throw new Error(
                 "Vendor could not be saved."
             );
 
-            return;
         }
 
 
 
         // ==========================================
-        // CREATE REVIEWTAP CUSTOMER URL
+        // CREATE CUSTOMER URL
         // ==========================================
 
         const reviewtapURL =
@@ -213,67 +601,117 @@ async function generateQR() {
 
 
         // ==========================================
-        // DISPLAY RESULT
+        // QR URL
+        // ==========================================
+
+        const qrURL =
+            "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" +
+            encodeURIComponent(reviewtapURL);
+
+
+
+        // ==========================================
+        // SHOW RESULT
         // ==========================================
 
         document.getElementById("result").innerHTML = `
 
-            <hr>
+            <div class="success-box">
 
-            <h3>
-                Vendor Created Successfully
-            </h3>
+                <div class="success-title">
+                    ✓ Vendor Created Successfully
+                </div>
 
-
-            <p>
-                <strong>
-                    ${vendorName}
-                </strong>
-            </p>
-
-
-            <label>
-                Vendor ID
-            </label>
-
-            <input
-                value="${vendorId}"
-                readonly
-            >
-
-
-            <label>
-                ReviewTap URL
-            </label>
-
-            <input
-                value="${reviewtapURL}"
-                readonly
-            >
-
-
-            <div
-                style="
-                    text-align:center;
-                    margin-top:20px;
-                "
-            >
-
-                <img
-                    src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(reviewtapURL)}"
-                    width="250"
-                    height="250"
-                    alt="ReviewTap QR Code"
-                >
+                <div class="success-text">
+                    Your ReviewTap QR code is ready.
+                </div>
 
             </div>
 
 
-            <button
-                onclick="window.print()"
-            >
-                Print QR
-            </button>
+            <div class="result-group">
+
+                <span class="result-label">
+                    Vendor ID
+                </span>
+
+                <div class="copy-row">
+
+                    <input
+                        id="vendorIdField"
+                        value="${vendorId}"
+                        readonly
+                    >
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyText('vendorIdField')"
+                    >
+                        Copy
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="result-group">
+
+                <span class="result-label">
+                    ReviewTap Customer URL
+                </span>
+
+                <div class="copy-row">
+
+                    <input
+                        id="reviewtapUrlField"
+                        value="${reviewtapURL}"
+                        readonly
+                    >
+
+                    <button
+                        class="copy-btn"
+                        onclick="copyText('reviewtapUrlField')"
+                    >
+                        Copy
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="qr-section">
+
+                <h3>
+                    ReviewTap QR Code
+                </h3>
+
+                <p>
+                    Print this QR code and display it at the vendor location.
+                </p>
+
+
+                <div class="qr-container">
+
+                    <img
+                        src="${qrURL}"
+                        alt="ReviewTap QR Code"
+                    >
+
+                </div>
+
+
+                <button
+                    class="print-btn"
+                    onclick="window.print()"
+                >
+                    Print QR Code
+                </button>
+
+            </div>
 
         `;
 
@@ -281,19 +719,56 @@ async function generateQR() {
     }
 
 
-    // ==========================================
-    // ERROR HANDLING
-    // ==========================================
-
     catch (error) {
 
         console.error(error);
 
         alert(
-            "Connection error. Please check your internet connection and try again."
+            "Unable to create vendor. Please try again."
         );
 
     }
+
+
+    finally {
+
+        generateBtn.disabled = false;
+
+        loading.style.display = "none";
+
+    }
+
+}
+
+
+
+// ==========================================
+// COPY TEXT
+// ==========================================
+
+function copyText(fieldId) {
+
+
+    const field =
+        document.getElementById(fieldId);
+
+
+    navigator.clipboard
+        .writeText(field.value)
+        .then(function() {
+
+            alert("Copied successfully!");
+
+        })
+        .catch(function() {
+
+            field.select();
+
+            document.execCommand("copy");
+
+            alert("Copied successfully!");
+
+        });
 
 }
 
@@ -304,4 +779,3 @@ async function generateQR() {
 </body>
 
 </html>
-```
