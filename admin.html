@@ -1,18 +1,20 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>ReviewTap Admin</title>
+    <title>ReviewTap Admin</title>
 
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
+
 
 <body>
 
@@ -22,6 +24,7 @@
         Review<span>Tap</span>
     </div>
 
+
     <div class="card">
 
         <h1>Add Vendor</h1>
@@ -29,6 +32,9 @@
         <p class="subtitle">
             Create a ReviewTap QR for your vendor.
         </p>
+
+
+        <!-- Vendor Name -->
 
         <label>Vendor Name</label>
 
@@ -38,6 +44,9 @@
             placeholder="Example: ABC Restaurant"
         >
 
+
+        <!-- Google Review Link -->
+
         <label>Google Review Page Link</label>
 
         <input
@@ -46,85 +55,253 @@
             placeholder="Paste Google review link"
         >
 
+
+        <!-- Generate Button -->
+
         <button onclick="generateQR()">
             Generate QR Code
         </button>
+
+
+        <!-- Result -->
 
         <div id="result"></div>
 
     </div>
 
+
+    <p class="footer">
+        Powered by ReviewTap
+    </p>
+
 </div>
+
 
 <script>
 
-function generateQR() {
+
+// ==========================================
+// GOOGLE APPS SCRIPT API URL
+// ==========================================
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycby_ltvYghy_0L4BX-ZJVzwq8f0D0anl5YABLxU2j_cKsOe28YNQhTp0bQnvUw8Ix1_v/exec";
+
+
+
+// ==========================================
+// GENERATE QR
+// ==========================================
+
+async function generateQR() {
+
+
+    // Get vendor name
 
     const vendorName =
-        document.getElementById("vendorName").value.trim();
+        document.getElementById("vendorName")
+        .value
+        .trim();
+
+
+    // Get Google review link
 
     const googleLink =
-        document.getElementById("googleLink").value.trim();
+        document.getElementById("googleLink")
+        .value
+        .trim();
+
+
+
+    // Validate input
 
     if (!vendorName || !googleLink) {
 
-        alert("Please enter vendor name and Google Review link.");
+        alert(
+            "Please enter vendor name and Google Review link."
+        );
 
         return;
     }
 
+
+
+    // ==========================================
+    // GENERATE UNIQUE VENDOR ID
+    // ==========================================
+
     const vendorId =
         "V" + Date.now();
 
-    const reviewtapURL =
-        window.location.origin +
-        window.location.pathname.replace(
-            "admin.html",
-            "index.html"
-        ) +
-        "?vendor=" +
-        vendorId;
 
-    document.getElementById("result").innerHTML = `
 
-        <h3>Vendor Created</h3>
+    // ==========================================
+    // SAVE VENDOR TO GOOGLE SHEET
+    // ==========================================
 
-        <p><strong>${vendorName}</strong></p>
+    try {
 
-        <p>Vendor ID:</p>
 
-        <input
-            value="${vendorId}"
-            readonly
-        >
+        const response = await fetch(
+            API_URL,
+            {
 
-        <p>ReviewTap URL:</p>
+                method: "POST",
 
-        <input
-            value="${reviewtapURL}"
-            readonly
-        >
+                headers: {
+                    "Content-Type":
+                    "text/plain;charset=utf-8"
+                },
 
-        <br><br>
+                body: JSON.stringify({
 
-        <img
-            src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(reviewtapURL)}"
-            width="250"
-            height="250"
-            alt="ReviewTap QR Code"
-        >
+                    vendorId:
+                        vendorId,
 
-        <br><br>
+                    vendorName:
+                        vendorName,
 
-        <button onclick="window.print()">
-            Print QR
-        </button>
+                    googleReviewLink:
+                        googleLink,
 
-    `;
+                    status:
+                        "Active"
+
+                })
+
+            }
+        );
+
+
+
+        // Convert response to JSON
+
+        const result =
+            await response.json();
+
+
+
+        // ==========================================
+        // CHECK DATABASE RESPONSE
+        // ==========================================
+
+        if (!result.success) {
+
+            alert(
+                "Vendor could not be saved."
+            );
+
+            return;
+        }
+
+
+
+        // ==========================================
+        // CREATE REVIEWTAP CUSTOMER URL
+        // ==========================================
+
+        const reviewtapURL =
+            window.location.origin +
+            window.location.pathname
+                .replace(
+                    "admin.html",
+                    "index.html"
+                ) +
+            "?vendor=" +
+            vendorId;
+
+
+
+        // ==========================================
+        // DISPLAY RESULT
+        // ==========================================
+
+        document.getElementById("result").innerHTML = `
+
+            <hr>
+
+            <h3>
+                Vendor Created Successfully
+            </h3>
+
+
+            <p>
+                <strong>
+                    ${vendorName}
+                </strong>
+            </p>
+
+
+            <label>
+                Vendor ID
+            </label>
+
+            <input
+                value="${vendorId}"
+                readonly
+            >
+
+
+            <label>
+                ReviewTap URL
+            </label>
+
+            <input
+                value="${reviewtapURL}"
+                readonly
+            >
+
+
+            <div
+                style="
+                    text-align:center;
+                    margin-top:20px;
+                "
+            >
+
+                <img
+                    src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(reviewtapURL)}"
+                    width="250"
+                    height="250"
+                    alt="ReviewTap QR Code"
+                >
+
+            </div>
+
+
+            <button
+                onclick="window.print()"
+            >
+                Print QR
+            </button>
+
+        `;
+
+
+    }
+
+
+    // ==========================================
+    // ERROR HANDLING
+    // ==========================================
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Connection error. Please check your internet connection and try again."
+        );
+
+    }
+
 }
 
+
 </script>
+
 
 </body>
 
 </html>
+```
