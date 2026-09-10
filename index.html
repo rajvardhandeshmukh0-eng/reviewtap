@@ -2,11 +2,8 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>ReviewTap</title>
 
@@ -22,13 +19,7 @@
             background: #f5f7f6;
             font-family: Arial, Helvetica, sans-serif;
             color: #17201b;
-            display: flex;
-            flex-direction: column;
         }
-
-        /* =========================
-           HEADER
-        ========================= */
 
         .header {
             background: white;
@@ -46,127 +37,135 @@
             color: #18a558;
         }
 
-
-        /* =========================
-           MAIN
-        ========================= */
-
         .main {
             width: 100%;
             max-width: 520px;
             margin: auto;
-            padding: 35px 20px;
+            padding: 30px 18px;
         }
-
-
-        /* =========================
-           CARD
-        ========================= */
 
         .card {
             background: white;
             border-radius: 20px;
-            padding: 30px 25px;
+            padding: 28px 22px;
             box-shadow: 0 8px 30px rgba(0,0,0,0.06);
             border: 1px solid #e8ece9;
-            text-align: center;
         }
-
-
-        /* =========================
-           LOADING
-        ========================= */
-
-        .loading {
-            padding: 40px 10px;
-        }
-
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid #e5e7eb;
-            border-top: 4px solid #18a558;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-
-        @keyframes spin {
-
-            100% {
-                transform: rotate(360deg);
-            }
-
-        }
-
-
-        /* =========================
-           CONTENT
-        ========================= */
 
         .business-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 20px;
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 18px;
             border-radius: 50%;
             background: #eaf8f0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
+            font-size: 30px;
         }
 
         .business-name {
-            font-size: 25px;
+            text-align: center;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 10px;
-            word-break: break-word;
+            margin-bottom: 8px;
         }
 
         .welcome {
+            text-align: center;
             color: #6b7280;
-            font-size: 15px;
+            font-size: 14px;
             line-height: 1.6;
             margin-bottom: 28px;
         }
 
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
 
-        /* =========================
-           REVIEW BOX
-        ========================= */
+        /* Rating */
 
-        .review-box {
-            background: #f8faf9;
-            border: 1px solid #e5e7eb;
-            border-radius: 15px;
-            padding: 20px;
+        .rating {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .star {
+            font-size: 38px;
+            color: #d1d5db;
+            cursor: pointer;
+            transition: 0.15s;
+        }
+
+        .star.selected {
+            color: #f5b301;
+        }
+
+        .rating-text {
+            text-align: center;
+            color: #6b7280;
+            font-size: 13px;
+            margin-top: -20px;
+            margin-bottom: 25px;
+        }
+
+        /* Options */
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 24px;
+        }
+
+        .option {
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 20px;
+            padding: 10px 14px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option.selected {
+            background: #eaf8f0;
+            border-color: #18a558;
+            color: #137a43;
+            font-weight: 600;
+        }
+
+        .option:hover {
+            border-color: #18a558;
+        }
+
+        /* Text */
+
+        textarea {
+            width: 100%;
+            min-height: 100px;
+            resize: vertical;
+            border: 1px solid #d1d5db;
+            border-radius: 11px;
+            padding: 13px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            outline: none;
             margin-bottom: 20px;
         }
 
-        .stars {
-            font-size: 25px;
-            letter-spacing: 4px;
-            margin-bottom: 10px;
+        textarea:focus {
+            border-color: #18a558;
+            box-shadow: 0 0 0 3px rgba(24,165,88,0.10);
         }
 
-        .review-title {
-            font-size: 17px;
-            font-weight: 700;
-            margin-bottom: 7px;
-        }
+        /* Button */
 
-        .review-text {
-            color: #6b7280;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-
-        /* =========================
-           BUTTON
-        ========================= */
-
-        .review-btn {
+        .generate-btn {
             width: 100%;
             padding: 16px;
             border: none;
@@ -176,51 +175,103 @@
             font-size: 16px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.2s;
         }
 
-        .review-btn:hover {
+        .generate-btn:hover {
             background: #138a49;
         }
 
-        .review-btn:active {
-            transform: scale(0.98);
+        /* Suggestions */
+
+        #suggestions {
+            margin-top: 25px;
         }
 
+        .suggestion-card {
+            border: 1px solid #e5e7eb;
+            background: #f9fafb;
+            border-radius: 13px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
 
-        /* =========================
-           FOOTER
-        ========================= */
+        .suggestion-title {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
 
-        .footer {
-            text-align: center;
-            color: #9ca3af;
+        .suggestion-text {
+            color: #374151;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 13px;
+        }
+
+        .copy-btn {
+            border: none;
+            border-radius: 8px;
+            padding: 9px 14px;
+            background: #17201b;
+            color: white;
             font-size: 12px;
-            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
         }
 
+        .google-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #18a558;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
 
-        /* =========================
-           ERROR
-        ========================= */
+        .google-btn:hover {
+            background: #138a49;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px 10px;
+            color: #6b7280;
+        }
+
+        .spinner {
+            width: 38px;
+            height: 38px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #18a558;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 18px;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error {
+            text-align: center;
+            padding: 35px 10px;
+        }
 
         .error-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            background: #fef2f2;
-            color: #dc2626;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
+            font-size: 40px;
+            margin-bottom: 15px;
         }
 
         .error-title {
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .error-text {
@@ -229,25 +280,30 @@
             line-height: 1.5;
         }
 
-
-        /* =========================
-           MOBILE
-        ========================= */
+        .footer {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 12px;
+            padding: 20px;
+        }
 
         @media (max-width: 600px) {
 
             .main {
-                padding: 25px 15px;
+                padding: 22px 14px;
             }
 
             .card {
-                padding: 25px 20px;
+                padding: 24px 18px;
             }
 
             .business-name {
-                font-size: 23px;
+                font-size: 22px;
             }
 
+            .star {
+                font-size: 34px;
+            }
         }
 
     </style>
@@ -256,9 +312,6 @@
 
 
 <body>
-
-
-<!-- HEADER -->
 
 <div class="header">
 
@@ -269,22 +322,15 @@
 </div>
 
 
-
-<!-- MAIN -->
-
 <div class="main">
 
     <div class="card" id="content">
-
-        <!-- Loading -->
 
         <div class="loading">
 
             <div class="spinner"></div>
 
-            <div>
-                Loading...
-            </div>
+            Loading...
 
         </div>
 
@@ -293,11 +339,9 @@
 </div>
 
 
-
 <div class="footer">
     Powered by ReviewTap
 </div>
-
 
 
 <script>
@@ -311,19 +355,21 @@ const API_URL =
 "https://script.google.com/macros/s/AKfycby_ltvYghy_0L4BX-ZJVzwq8f0D0anl5YABLxU2j_cKsOe28YNQhTp0bQnvUw8Ix1_v/exec";
 
 
-
 // ==========================================
-// GET VENDOR ID FROM URL
+// GET VENDOR ID
 // ==========================================
 
 const urlParams =
-    new URLSearchParams(
-        window.location.search
-    );
+    new URLSearchParams(window.location.search);
 
 const vendorId =
     urlParams.get("vendor");
 
+let googleReviewLink = "";
+
+let selectedRating = 0;
+
+let selectedOptions = [];
 
 
 // ==========================================
@@ -335,9 +381,6 @@ async function loadVendor() {
     const content =
         document.getElementById("content");
 
-
-    // Check vendor ID
-
     if (!vendorId) {
 
         showError(
@@ -346,9 +389,7 @@ async function loadVendor() {
         );
 
         return;
-
     }
-
 
     try {
 
@@ -359,24 +400,18 @@ async function loadVendor() {
                 encodeURIComponent(vendorId)
             );
 
-
         const data =
             await response.json();
-
 
         if (!data.success) {
 
             showError(
                 "Vendor Not Found",
-                "We could not find this business. Please contact the business owner."
+                "We could not find this business."
             );
 
             return;
-
         }
-
-
-        // Check status
 
         if (
             data.status &&
@@ -389,16 +424,14 @@ async function loadVendor() {
             );
 
             return;
-
         }
 
+        googleReviewLink =
+            data.googleReviewLink;
 
-        // Show vendor page
-
-        showVendor(data);
+        showReviewPage(data);
 
     }
-
 
     catch (error) {
 
@@ -408,22 +441,18 @@ async function loadVendor() {
             "Something went wrong",
             "Unable to load this ReviewTap page. Please try again."
         );
-
     }
-
 }
 
 
-
 // ==========================================
-// SHOW VENDOR
+// SHOW REVIEW PAGE
 // ==========================================
 
-function showVendor(data) {
+function showReviewPage(data) {
 
     const content =
         document.getElementById("content");
-
 
     content.innerHTML = `
 
@@ -431,60 +460,354 @@ function showVendor(data) {
             ⭐
         </div>
 
-
         <div class="business-name">
             ${escapeHTML(data.vendorName)}
         </div>
 
-
         <div class="welcome">
 
             Thank you for visiting us!<br>
+            Tell us about your experience and we'll help you write a review.
 
-            We would love to hear about your experience.
+        </div>
+
+
+        <div class="section-title">
+            How was your experience?
+        </div>
+
+
+        <div class="rating">
+
+            <span class="star" onclick="selectRating(1)">★</span>
+            <span class="star" onclick="selectRating(2)">★</span>
+            <span class="star" onclick="selectRating(3)">★</span>
+            <span class="star" onclick="selectRating(4)">★</span>
+            <span class="star" onclick="selectRating(5)">★</span>
 
         </div>
 
 
-        <div class="review-box">
+        <div class="rating-text" id="ratingText">
+            Select your rating
+        </div>
 
-            <div class="stars">
-                ★★★★★
-            </div>
 
-            <div class="review-title">
-                Enjoyed your experience?
-            </div>
+        <div class="section-title">
+            What did you like?
+        </div>
 
-            <div class="review-text">
 
-                Your feedback helps us improve
-                and helps other customers discover us.
+        <div class="options">
 
-            </div>
+            <button class="option"
+                onclick="toggleOption(this, 'Product / Service')">
+                Product / Service
+            </button>
+
+            <button class="option"
+                onclick="toggleOption(this, 'Staff')">
+                Friendly Staff
+            </button>
+
+            <button class="option"
+                onclick="toggleOption(this, 'Quality')">
+                Good Quality
+            </button>
+
+            <button class="option"
+                onclick="toggleOption(this, 'Fast Service')">
+                Fast Service
+            </button>
+
+            <button class="option"
+                onclick="toggleOption(this, 'Cleanliness')">
+                Cleanliness
+            </button>
+
+            <button class="option"
+                onclick="toggleOption(this, 'Value for Money')">
+                Value for Money
+            </button>
 
         </div>
+
+
+        <div class="section-title">
+            Anything else you'd like to mention?
+        </div>
+
+
+        <textarea
+            id="customerComment"
+            placeholder="Example: The staff was very helpful and the service was quick..."
+        ></textarea>
 
 
         <button
-            class="review-btn"
+            class="generate-btn"
+            onclick="generateSuggestions()"
+        >
+            Generate Review Suggestions
+        </button>
+
+
+        <div id="suggestions"></div>
+
+    `;
+}
+
+
+// ==========================================
+// SELECT RATING
+// ==========================================
+
+function selectRating(rating) {
+
+    selectedRating = rating;
+
+    const stars =
+        document.querySelectorAll(".star");
+
+    stars.forEach(function(star, index) {
+
+        if (index < rating) {
+
+            star.classList.add("selected");
+
+        } else {
+
+            star.classList.remove("selected");
+
+        }
+
+    });
+
+
+    const ratingText =
+        document.getElementById("ratingText");
+
+    const messages = {
+        1: "We're sorry your experience wasn't better.",
+        2: "Thank you for your feedback.",
+        3: "Thank you! We're glad you visited us.",
+        4: "Great! We're happy you enjoyed your experience.",
+        5: "Excellent! We're glad you loved your experience!"
+    };
+
+    ratingText.textContent =
+        messages[rating];
+
+}
+
+
+// ==========================================
+// SELECT OPTIONS
+// ==========================================
+
+function toggleOption(button, value) {
+
+    button.classList.toggle("selected");
+
+    if (selectedOptions.includes(value)) {
+
+        selectedOptions =
+            selectedOptions.filter(
+                item => item !== value
+            );
+
+    } else {
+
+        selectedOptions.push(value);
+
+    }
+
+}
+
+
+// ==========================================
+// GENERATE REVIEW SUGGESTIONS
+// ==========================================
+
+function generateSuggestions() {
+
+    if (selectedRating === 0) {
+
+        alert("Please select your rating first.");
+
+        return;
+    }
+
+
+    const comment =
+        document
+            .getElementById("customerComment")
+            .value
+            .trim();
+
+
+    const vendorName =
+        document
+            .querySelector(".business-name")
+            .textContent;
+
+
+    const ratingText =
+        "⭐".repeat(selectedRating);
+
+
+    let experience = "";
+
+    if (selectedOptions.length > 0) {
+
+        experience =
+            selectedOptions.join(", ");
+
+    } else {
+
+        experience =
+            "overall experience";
+
+    }
+
+
+    let extraText = "";
+
+    if (comment) {
+
+        extraText =
+            " " + comment;
+
+    }
+
+
+    // ======================================
+    // CREATE 3 LOCAL SUGGESTIONS
+    // ======================================
+
+    const suggestion1 =
+        `I had a ${selectedRating >= 4 ? "great" : "good"} experience at ${vendorName}. I really appreciated the ${experience}.${extraText}`;
+
+
+    const suggestion2 =
+        `Really happy with my experience at ${vendorName}. The ${experience} made my visit enjoyable.${extraText} I would definitely recommend them.`;
+
+
+    const suggestion3 =
+        `Had a pleasant experience at ${vendorName}. Everything was good, especially the ${experience}.${extraText} Overall, a very positive experience.`;
+
+
+    showSuggestions([
+        suggestion1,
+        suggestion2,
+        suggestion3
+    ]);
+
+}
+
+
+// ==========================================
+// SHOW SUGGESTIONS
+// ==========================================
+
+function showSuggestions(suggestions) {
+
+    const container =
+        document.getElementById("suggestions");
+
+
+    let html = `
+
+        <div class="section-title">
+            Choose a review you like
+        </div>
+
+    `;
+
+
+    suggestions.forEach(function(review, index) {
+
+        html += `
+
+            <div class="suggestion-card">
+
+                <div class="suggestion-title">
+                    Review Option ${index + 1}
+                </div>
+
+                <div class="suggestion-text">
+                    ${escapeHTML(review)}
+                </div>
+
+                <button
+                    class="copy-btn"
+                    onclick="copyReview(${index})"
+                >
+                    Copy Review
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+        <button
+            class="google-btn"
             onclick="openGoogleReview()"
         >
-
             ⭐ Write a Google Review
-
         </button>
 
     `;
 
 
-    // Save Google link for button
+    container.innerHTML = html;
 
-    window.googleReviewLink =
-        data.googleReviewLink;
+
+    window.generatedReviews =
+        suggestions;
+
+
+    container.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 
 }
 
+
+// ==========================================
+// COPY REVIEW
+// ==========================================
+
+function copyReview(index) {
+
+    const review =
+        window.generatedReviews[index];
+
+
+    navigator.clipboard
+        .writeText(review)
+        .then(function() {
+
+            alert(
+                "Review copied! Now open Google Reviews and paste it."
+            );
+
+        })
+        .catch(function() {
+
+            alert(
+                "Unable to copy automatically. Please select the review manually."
+            );
+
+        });
+
+}
 
 
 // ==========================================
@@ -493,56 +816,50 @@ function showVendor(data) {
 
 function openGoogleReview() {
 
-    if (!window.googleReviewLink) {
+    if (!googleReviewLink) {
 
         alert(
             "Google Review link is not available."
         );
 
         return;
-
     }
 
 
     window.open(
-        window.googleReviewLink,
+        googleReviewLink,
         "_blank"
     );
 
 }
 
 
-
 // ==========================================
-// ERROR PAGE
+// ERROR
 // ==========================================
 
 function showError(title, message) {
 
-    const content =
-        document.getElementById("content");
+    document.getElementById("content").innerHTML = `
 
+        <div class="error">
 
-    content.innerHTML = `
+            <div class="error-icon">
+                ⚠️
+            </div>
 
-        <div class="error-icon">
-            !
-        </div>
+            <div class="error-title">
+                ${title}
+            </div>
 
+            <div class="error-text">
+                ${message}
+            </div>
 
-        <div class="error-title">
-            ${title}
-        </div>
-
-
-        <div class="error-text">
-            ${message}
         </div>
 
     `;
-
 }
-
 
 
 // ==========================================
@@ -552,19 +869,13 @@ function showError(title, message) {
 function escapeHTML(value) {
 
     return String(value)
-
         .replace(/&/g, "&amp;")
-
         .replace(/</g, "&lt;")
-
         .replace(/>/g, "&gt;")
-
         .replace(/"/g, "&quot;")
-
         .replace(/'/g, "&#039;");
 
 }
-
 
 
 // ==========================================
@@ -573,9 +884,7 @@ function escapeHTML(value) {
 
 loadVendor();
 
-
 </script>
-
 
 </body>
 
