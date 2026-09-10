@@ -1,61 +1,582 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>ReviewTap</title>
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #f5f7f6;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #17201b;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 700;
+        }
+
+        .logo span {
+            color: #18a558;
+        }
+
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            width: 100%;
+            max-width: 520px;
+            margin: auto;
+            padding: 35px 20px;
+        }
+
+
+        /* =========================
+           CARD
+        ========================= */
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 25px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 1px solid #e8ece9;
+            text-align: center;
+        }
+
+
+        /* =========================
+           LOADING
+        ========================= */
+
+        .loading {
+            padding: 40px 10px;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e5e7eb;
+            border-top: 4px solid #18a558;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+
+            100% {
+                transform: rotate(360deg);
+            }
+
+        }
+
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .business-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #eaf8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .business-name {
+            font-size: 25px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
+
+        .welcome {
+            color: #6b7280;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+
+        /* =========================
+           REVIEW BOX
+        ========================= */
+
+        .review-box {
+            background: #f8faf9;
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            font-size: 25px;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .review-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 7px;
+        }
+
+        .review-text {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .review-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 11px;
+            background: #18a558;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .review-btn:hover {
+            background: #138a49;
+        }
+
+        .review-btn:active {
+            transform: scale(0.98);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+            color: #9ca3af;
+            font-size: 12px;
+            padding: 20px;
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #fef2f2;
+            color: #dc2626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+
+        .error-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .error-text {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .main {
+                padding: 25px 15px;
+            }
+
+            .card {
+                padding: 25px 20px;
+            }
+
+            .business-name {
+                font-size: 23px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 
 <body>
 
-<div class="container">
+
+<!-- HEADER -->
+
+<div class="header">
 
     <div class="logo">
         Review<span>Tap</span>
     </div>
 
-    <div class="card">
+</div>
 
-        <h1>How was your experience?</h1>
 
-        <p class="subtitle">
-            Your feedback helps this business grow.
-        </p>
 
-        <h3>Choose a review suggestion</h3>
+<!-- MAIN -->
 
-        <div id="suggestions"></div>
+<div class="main">
 
-        <label>Your review</label>
+    <div class="card" id="content">
 
-        <textarea
-            id="review"
-            placeholder="Write or edit your review here..."
-        ></textarea>
+        <!-- Loading -->
 
-        <button id="copyBtn">
-            Copy Review
-        </button>
+        <div class="loading">
 
-        <button id="googleBtn" class="google">
-            Post on Google
-        </button>
+            <div class="spinner"></div>
 
-        <p id="message"></p>
+            <div>
+                Loading...
+            </div>
+
+        </div>
 
     </div>
 
-    <p class="footer">
-        Powered by ReviewTap
-    </p>
-
 </div>
 
-<script src="config.js"></script>
-<script src="app.js"></script>
+
+
+<div class="footer">
+    Powered by ReviewTap
+</div>
+
+
+
+<script>
+
+
+// ==========================================
+// GOOGLE APPS SCRIPT API
+// ==========================================
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycby_ltvYghy_0L4BX-ZJVzwq8f0D0anl5YABLxU2j_cKsOe28YNQhTp0bQnvUw8Ix1_v/exec";
+
+
+
+// ==========================================
+// GET VENDOR ID FROM URL
+// ==========================================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const vendorId =
+    urlParams.get("vendor");
+
+
+
+// ==========================================
+// LOAD VENDOR
+// ==========================================
+
+async function loadVendor() {
+
+    const content =
+        document.getElementById("content");
+
+
+    // Check vendor ID
+
+    if (!vendorId) {
+
+        showError(
+            "Invalid QR Code",
+            "This ReviewTap QR code does not contain a valid vendor ID."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                API_URL +
+                "?vendorId=" +
+                encodeURIComponent(vendorId)
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!data.success) {
+
+            showError(
+                "Vendor Not Found",
+                "We could not find this business. Please contact the business owner."
+            );
+
+            return;
+
+        }
+
+
+        // Check status
+
+        if (
+            data.status &&
+            data.status.toString().toLowerCase() !== "active"
+        ) {
+
+            showError(
+                "QR Code Inactive",
+                "This ReviewTap QR code is currently inactive."
+            );
+
+            return;
+
+        }
+
+
+        // Show vendor page
+
+        showVendor(data);
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+        showError(
+            "Something went wrong",
+            "Unable to load this ReviewTap page. Please try again."
+        );
+
+    }
+
+}
+
+
+
+// ==========================================
+// SHOW VENDOR
+// ==========================================
+
+function showVendor(data) {
+
+    const content =
+        document.getElementById("content");
+
+
+    content.innerHTML = `
+
+        <div class="business-icon">
+            ⭐
+        </div>
+
+
+        <div class="business-name">
+            ${escapeHTML(data.vendorName)}
+        </div>
+
+
+        <div class="welcome">
+
+            Thank you for visiting us!<br>
+
+            We would love to hear about your experience.
+
+        </div>
+
+
+        <div class="review-box">
+
+            <div class="stars">
+                ★★★★★
+            </div>
+
+            <div class="review-title">
+                Enjoyed your experience?
+            </div>
+
+            <div class="review-text">
+
+                Your feedback helps us improve
+                and helps other customers discover us.
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="review-btn"
+            onclick="openGoogleReview()"
+        >
+
+            ⭐ Write a Google Review
+
+        </button>
+
+    `;
+
+
+    // Save Google link for button
+
+    window.googleReviewLink =
+        data.googleReviewLink;
+
+}
+
+
+
+// ==========================================
+// OPEN GOOGLE REVIEW
+// ==========================================
+
+function openGoogleReview() {
+
+    if (!window.googleReviewLink) {
+
+        alert(
+            "Google Review link is not available."
+        );
+
+        return;
+
+    }
+
+
+    window.open(
+        window.googleReviewLink,
+        "_blank"
+    );
+
+}
+
+
+
+// ==========================================
+// ERROR PAGE
+// ==========================================
+
+function showError(title, message) {
+
+    const content =
+        document.getElementById("content");
+
+
+    content.innerHTML = `
+
+        <div class="error-icon">
+            !
+        </div>
+
+
+        <div class="error-title">
+            ${title}
+        </div>
+
+
+        <div class="error-text">
+            ${message}
+        </div>
+
+    `;
+
+}
+
+
+
+// ==========================================
+// HTML ESCAPE
+// ==========================================
+
+function escapeHTML(value) {
+
+    return String(value)
+
+        .replace(/&/g, "&amp;")
+
+        .replace(/</g, "&lt;")
+
+        .replace(/>/g, "&gt;")
+
+        .replace(/"/g, "&quot;")
+
+        .replace(/'/g, "&#039;");
+
+}
+
+
+
+// ==========================================
+// START
+// ==========================================
+
+loadVendor();
+
+
+</script>
+
 
 </body>
+
 </html>
